@@ -18,7 +18,7 @@ class Artist
   end
 
   def self.all
-    @@all.uniq
+    @@all
   end
 
   def self.find_name(name)
@@ -27,8 +27,12 @@ class Artist
 
   def self.find_or_create_by_name(name)
     result = self.find_name(name)
-    result ? result : result = self.new(name)
-    result.save
+    if result
+      result
+    else
+      result = self.new(name)
+      result.save
+    end
   end
 
   def print_songs
